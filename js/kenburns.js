@@ -3,9 +3,10 @@
  * Original author: John [at] Toymakerlabs
  * Further changes, comments: [at]Toymakerlabs
  * Licensed under the MIT license
- * 
+ *
  * Copyright (c) 2013 ToymakerLabs
-
+ * Version forked in: https://github.com/hector-romero/kenburns
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
  * and associated documentation files (the "Software"), to deal in the Software without restriction,
  * including without limitation the rights to use, copy, modify, merge, publish, distribute, 
@@ -86,7 +87,6 @@
 		var img = wrapper.find("img");
         img.addClass("kb-slide-img");
 
-
         //First check if the browser supports 3D transitions, initialize the CSS accordingly
         if(this.has3d) {
             img.css({'-webkit-transform-origin':'left top'});
@@ -116,7 +116,6 @@
             }else {
                 that.currentSlide = 0;
             }
-            
             that.doTransition();
 		},this.options.duration);
 	};
@@ -133,14 +132,15 @@
         var scale = this.options.scale;
         var image = this.getCurrentImage();
         var ratio = image[0].height / image[0].width;
-        var sw = Math.floor(this.$element.width() * (1/scale));
-        var sh = Math.floor(this.$element.width() * ratio*(1/scale));
+        var w = this.$element.width();
+        var h = this.$element.height();
+
+        var sw = Math.floor(w * (1/scale));
+        var sh = Math.floor(w * ratio*(1/scale));
 
         image.width(sw);
         image.height(sh);
 
-        var w = this.$element.width();
-        var h = this.$element.height();
 
         var corners = [
             {x:0,y:0},
@@ -245,8 +245,8 @@
         image.css({'left':position.startX,'top':position.startY,'width':sw*(scale),'height':sh*(scale)});
         image.animate({'left':position.endX,'top':position.endY,'width':sw,'height':sh}, that.options.duration + that.options.fadeSpeed);
         
-        image.parent().css({'opacity':0,'z-index':3});
-        image.parent().animate({'opacity':1},that.options.fadeSpeed);
+        slide.css({'opacity':0,'z-index':3});
+        slide.animate({'opacity':1},that.options.fadeSpeed);
 
         this.transitionOut();
         this.options.onSlideComplete(this.currentSlide);
