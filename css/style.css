@@ -39,7 +39,7 @@ allows me to run separate animations simultaneously. */
 didnt like the opacity when the img was set to absolute*
 translate3d(000) kicks them into HW acceleration, and 
 backface-visibility gives some performance boosts.*/
-.kb-slide img{
+.kb-slide-img{
 	position: relative;
 	-webkit-transform: translate3d(0,0,0)
 	-moz-transform: translate3d(0,0,0);
