@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<div id="kenburns-slideshow">
+	<div class="kenburns-slideshow slideshow-1">
         <div class="kb-slide"><img src="images/image0.jpg" /></div>
         <div class="kb-slide"><img src="images/image1.jpg" /></div>
         <div class="kb-slide"><img src="images/image2.jpg" /></div>
@@ -12,6 +12,15 @@
         <div class="kb-slide"><img src="images/image4.jpg" /></div>
         <div class="kb-slide"><img src="images/image5.jpg" /></div>
     </div>
+    <div class="kenburns-slideshow slideshow-2">
+           <div class="kb-slide"><img src="small_images/image0.jpg" /></div>
+           <div class="kb-slide"><img src="small_images/image1.jpg" /></div>
+           <div class="kb-slide"><img src="small_images/image2.jpg" /></div>
+           <div class="kb-slide"><img src="small_images/image3.jpg" /></div>
+           <div class="kb-slide"><img src="small_images/image4.jpg" /></div>
+           <div class="kb-slide"><img src="small_images/image5.jpg" /></div>
+       </div>
+
 	<div id="kenburns-description">
 		<h1 id="status">Loading Images..</h1>
 		<h1 id="slide-title"></h1>
@@ -31,7 +40,7 @@
 				  "Hope Ranch Views"];
 
 	$(document).ready(function() {
-	    $('#kenburns-slideshow').Kenburns({
+	    $('.slideshow-1').Kenburns({
 	    	scale:0.75,
 	    	duration:8000,
 	    	fadeSpeed:1200,
@@ -39,8 +48,14 @@
 	    	onSlideComplete: function(index){
 	    		$('#slide-title').html(titles[index]);
 	    	}
-
 	    });
+        $('.slideshow-2').Kenburns({
+   	    	scale:0.75,
+   	    	duration:8000,
+   	    	fadeSpeed:1200,
+   	    	ease3d:'cubic-bezier(0.445, 0.050, 0.550, 0.950)'
+   	    });
+
 	});
 	</script>
 </body>

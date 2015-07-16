@@ -16,7 +16,7 @@ if the image size is smaller than the frame size,
 gaps may appear. If image sizes are exactly the same,
 the images will fade over one another and not move. 
 */
-#kenburns-slideshow {
+.kenburns-slideshow {
 	position: relative;
 	width:600px;
 	height: 360px;

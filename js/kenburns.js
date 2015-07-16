@@ -94,6 +94,11 @@
             img.css({'-webkit-transform':'scale('+that.options.scale+') translate3d(0,0,0)'});
             img.css({'-moz-transform':'scale('+that.options.scale+') translate3d(0,0,0)'});
         }
+        var ratio = img[0].height / img[0].width;
+        img.data("aspect-ratio",ratio);
+        img.load(function(){
+            img.data("aspect-ratio", this.height / this.width);
+        });
 	};
 
     /* 3. Transitions and Movement
@@ -131,7 +136,7 @@
     Plugin.prototype.chooseCorner = function() {
         var scale = this.options.scale;
         var image = this.getCurrentImage();
-        var ratio = image[0].height / image[0].width;
+        var ratio = image.data("aspect-ratio");
         var w = this.$element.width();
         var h = this.$element.height();
 
@@ -162,7 +167,9 @@
             startX: start.x * (w - sw * scale),
             startY: start.y * (h - sh * scale),
             endX: end.x * (w - sw),
-            endY: end.y * (h - sh)
+            endY: end.y * (h - sh),
+            imageWidth: sw,
+            imageHeight: sh
         };
 
       //  console.log("CORNER " + coordinates.startX + " , "+coordinates.startY + " , " +coordinates.endX + " , " +coordinates.endY);
@@ -238,9 +245,9 @@
         var slide = this.getCurrentSlide();
         var image = this.getCurrentImage();
 
-        var sw = image.width();
-        var sh = image.height();
         var position = this.chooseCorner();
+        var sw = position.imageWidth;
+        var sh = position.imageHeight;
 
         image.css({'left':position.startX,'top':position.startY,'width':sw*(scale),'height':sh*(scale)});
         image.animate({'left':position.endX,'top':position.endY,'width':sw,'height':sh}, that.options.duration + that.options.fadeSpeed);
