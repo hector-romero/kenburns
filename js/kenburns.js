@@ -140,9 +140,14 @@
         var w = this.$element.width();
         var h = this.$element.height();
 
-        var sw = Math.floor(w * (1/scale));
-        var sh = Math.floor(w * ratio*(1/scale));
-
+        var sw, sh;
+        if(ratio > h / w) {
+            sw = Math.floor(w * (1/scale));
+            sh = Math.floor(w * ratio * (1/scale));
+        } else {
+            sw = Math.floor(h * (1 / ratio) * (1/scale));
+            sh = Math.floor(h *  (1/scale));
+        }
         image.width(sw);
         image.height(sh);
 
